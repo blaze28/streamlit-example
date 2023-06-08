@@ -19,10 +19,10 @@ else:
           }
 
         # Write the data to a CSV file
-         with open(csv_path, mode='a', newline='') as file:
-         writer = csv.DictWriter(file, fieldnames=data.keys())
-         if file.tell() == 0:
-              writer.writeheader()  # Write the header if the file is empty
-         writer.writerow(data)
+       with open(csv_path, mode='a', newline='') as file:
+       writer = csv.DictWriter(file, fieldnames=data.keys())
+       if file.tell() == 0:
+         writer.writeheader()  # Write the header if the file is empty
+       writer.writerow(data)
 
-         st.sidebar.success("Thanks for submitting your information!")
+       st.sidebar.success("Thanks for submitting your information!")
