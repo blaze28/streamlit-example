@@ -1,3 +1,5 @@
+import csv
+import streamlit as st
 st.sidebar.title("Your Information")
 
 Name = st.sidebar.text_input("Full Name")
