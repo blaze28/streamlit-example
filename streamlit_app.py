@@ -1,4 +1,4 @@
- st.sidebar.title("Your Information")
+st.sidebar.title("Your Information")
 
    Name = st.sidebar.text_input("Full Name")
    Contact_Number = st.sidebar.text_input("Contact Number")
