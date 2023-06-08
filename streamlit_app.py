@@ -1,45 +1,28 @@
-import streamlit as st
+ st.sidebar.title("Your Information")
 
-# Header and Introduction
-st.title("Career Recommendation System")
-st.write("Welcome to the Career Recommendation System. This app will help you discover the best-fit career option based on your profile and skill ratings.")
+   Name = st.sidebar.text_input("Full Name")
+   Contact_Number = st.sidebar.text_input("Contact Number")
+   Email_address = st.sidebar.text_input("Email address")
 
-# User Input Section
-st.header("User Profile")
-name = st.text_input("Name")
-age = st.number_input("Age", min_value=1, max_value=100)
-education_level = st.selectbox("Education Level", ["High School", "Bachelor's Degree", "Master's Degree", "Ph.D."])
-areas_of_interest = st.multiselect("Areas of Interest", ["Technology", "Business", "Art", "Healthcare", "Science"])
-programming_skill = st.slider("Programming Skill (1-10)", 1, 10, 5)
-communication_skill = st.slider("Communication Skill (1-10)", 1, 10, 5)
-problem_solving_skill = st.slider("Problem Solving Skill (1-10)", 1, 10, 5)
+    if not Name or not Email_address:
+        st.sidebar.warning("Please fill out your name and email address")
+    else:
+        if st.sidebar.button("Submit"):
+        # Define the path to store the entered data
+            csv_path = "data.csv"
 
-# Recommendation Results
-st.header("Recommendation Results")
-# Perform your recommendation model's prediction based on the user's inputs
-# Store the recommended career path in a variable called 'recommended_career'
-recommended_career = "Software Engineer"  # Replace this with the actual recommendation
+        # Prepare the data as a dictionary
+            data = {
+            "Name": Name,
+            "Contact Number": Contact_Number,
+            "Email Address": Email_address
+            }
 
-st.success(f"Based on your profile and skill ratings, we recommend a career in {recommended_career}.")
+        # Write the data to a CSV file
+            with open(csv_path, mode='a', newline='') as file:
+                writer = csv.DictWriter(file, fieldnames=data.keys())
+                if file.tell() == 0:
+                    writer.writeheader()  # Write the header if the file is empty
+                writer.writerow(data)
 
-# Alternative Career Options
-st.header("Alternative Career Options")
-# List a few alternative career options along with brief descriptions
-alternative_careers = {
-    "Data Analyst": "Analyzing and interpreting complex data to help businesses make informed decisions.",
-    "Digital Marketer": "Developing and implementing online marketing strategies to promote products or services.",
-    "Graphic Designer": "Creating visual concepts using computer software to communicate ideas that inspire, inform, and captivate consumers."
-}
-for career, description in alternative_careers.items():
-    st.write(f"**{career}**: {description}")
-
-# Additional Resources
-st.header("Additional Resources")
-st.write("Here are some additional resources to explore and further enhance your career exploration:")
-st.write("- [Website 1](https://www.example.com)")
-st.write("- [Website 2](https://www.example.com)")
-st.write("- [Online Course 1](https://www.example.com)")
-st.write("- [Online Course 2](https://www.example.com)")
-
-# Footer
-st.write("Your app's footer or any necessary disclaimers can be placed here.")
+            st.sidebar.success("Thanks for submitting your information!")
